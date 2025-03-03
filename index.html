@@ -14,6 +14,7 @@
             margin: 0;
             text-align: center;
             background-color: #f9f9f9;
+            flex-direction: column;
         }
         .container {
             display: flex;
@@ -21,12 +22,24 @@
             align-items: center;
             justify-content: center;
         }
+        .fortune-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .fortune-header img {
+            vertical-align: middle;
+        }
         .roulette img {
             width: 300px;
             height: auto;
         }
-        .fortune {
-            margin-top: 20px;
+        .fortune-text {
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
         }
         .button-container {
             display: flex;
@@ -43,14 +56,14 @@
     </style>
 </head>
 <body>
+    <div class="fortune-header">
+        <h1><img src="ノコトロゴ.png" width="70" height="70" alt="ロゴ">占いノコト</h1>
+    </div>
     <div class="container">
         <div class="roulette">
-            <img id="image" src="イラスト1.jpg" width="301" height="127" alt="占い画像">
+            <img id="image" src="イラスト1.jpg" alt="占い画像">
         </div>
-        <div class="fortune">
-            <h2><img src="ノコトロゴ.png" width="60" height="60">占いノコト</h2>
-            <p id="fortune-text">結果がここに表示されます。</p>
-        </div>
+        <p id="fortune-text" class="fortune-text">結果がここに表示されます。</p>
         <div class="button-container">
             <img id="fortune-button" src="スタートボタン.png" alt="占うボタン" onclick="spinRoulette()">
         </div>
