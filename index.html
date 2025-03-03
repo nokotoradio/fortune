@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パラパラ占い</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="roulette">
+            <img id="image" src="イラスト1.jpg" alt="占い画像">
+        </div>
+        <div class="fortune">
+            <h2>今日の占い</h2>
+            <p id="fortune-text">結果がここに表示されます。</p>
+        </div>
+        <button id="fortune-button" onclick="spinRoulette()">💖 占う 💖</button>
+    </div>
+    
+    <script>
+        const images = ["イラスト1.jpg", "イラスト2.jpg", "イラスト3.jpg", "イラスト4.jpg", "イラスト5.jpg", "イラスト6.jpg"];
+        const fortunes = [
+            "今日は何をやってもうまくいく一日！自信を持って進もう！",
+            "嬉しいサプライズが待っているかも！ワクワクしながら過ごしてみて。",
+            "あなたの魅力が最大限に輝く日。笑顔を大切に！",
+            "新しいチャンスが訪れそう！アンテナを張ってみよう。",
+            "直感が冴える日。迷ったら心の声に従ってみて。",
+            "一歩ずつ着実に進むことが成功のカギ。焦らずマイペースで！",
+            "小さな幸せを大切に。心がほっこりする出来事があるかも。",
+            "今日はリラックスが大事。深呼吸して、心を整えよう。",
+            "少しスローペースな一日。でも、それも大切な時間！",
+            "無理をしなくても大丈夫。あなたのペースで進めばOK！",
+            "ちょっとしたハプニングも、視点を変えれば良い経験に！",
+            "思い通りにいかない時は、休憩のサインかも。ゆっくりしよう。",
+            "誰かの言葉に振り回されないで。あなたの信じる道を進めばOK！",
+            "頑張りすぎないことが今日のポイント。適度に力を抜こう。",
+            "もしつまずいても、それは次の成功へのステップ。大丈夫！"
+        ];
+        
+        function spinRoulette() {
+            const imageElement = document.getElementById('image');
+            const fortuneTextElement = document.getElementById('fortune-text');
+            let index = 0;
+            
+            // パラパラアニメーション
+            const interval = setInterval(() => {
+                index = (index + 1) % images.length;
+                imageElement.src = images[index];
+                fortuneTextElement.textContent = fortunes[index % fortunes.length];
+            }, 150);
+            
+            setTimeout(() => {
+                clearInterval(interval);
+                const randomIndex = Math.floor(Math.random() * images.length);
+                imageElement.src = images[randomIndex];
+                
+                const randomFortuneIndex = Math.floor(Math.random() * fortunes.length);
+                fortuneTextElement.textContent = fortunes[randomFortuneIndex];
+            }, 2000); // 2秒間アニメーション
+        }
+    </script>
+</body>
+</html>
