@@ -6,6 +6,27 @@
     <title>パラパラ占い</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .roulette img {
+            width: 300px;
+            height: auto;
+        }
+        .fortune {
+            margin-top: 20px;
+        }
         .button-container {
             display: flex;
             justify-content: center;
@@ -25,11 +46,11 @@
             <img id="image" src="イラスト1.jpg" alt="占い画像">
         </div>
         <div class="fortune">
-            <h1><img src="ノコトロゴ.png" width="80" height="80">占いのコト</h1>
+            <h2><img src="ノコトロゴ.png">占いノコト</h2>
             <p id="fortune-text">結果がここに表示されます。</p>
         </div>
         <div class="button-container">
-            <img id="fortune-button" src="button.png" alt="占うボタン" onclick="spinRoulette()">
+            <img id="fortune-button" src="スタートボタン.png" alt="占うボタン" onclick="spinRoulette()">
         </div>
     </div>
     
@@ -42,11 +63,11 @@
             "「新しいチャンスが訪れそう！アンテナを張ってみよう。」とのこと",
             "「直感が冴える日。迷ったら心の声に従ってみて。」とのこと",
             "「一歩ずつ着実に進むことが成功のカギ。焦らずマイペースで！」とのこと",
-            "」とのこと",
+            "「小さな幸せを大切に。心がほっこりする出来事があるかも。」とのこと",
             "「今日はリラックスが大事。深呼吸して、心を整えよう。」とのこと",
             "「少しスローペースな一日。でも、それも大切な時間！」とのこと",
             "「無理をしなくても大丈夫。あなたのペースで進めばOK!」とのこと",
-            "「ちょっとしたハプニングも、視点を変えれば良い経験に!」とのこと",
+            "「ちょっとしたハプニングも、視点を変えれば良い経験に！」とのこと",
             "「思い通りにいかない時は、休憩のサインかも。ゆっくりしよう。」とのこと",
             "「誰かの言葉に振り回されないで。あなたの信じる道を進めばOK!」とのこと",
             "「頑張りすぎないことが今日のポイント。適度に力を抜こう。」とのこと",
