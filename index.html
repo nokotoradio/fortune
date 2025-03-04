@@ -24,13 +24,15 @@
         }
         .fortune-header {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .fortune-header img {
-            vertical-align: middle;
+            width: 150px;
+            height: auto;
+        }
+        .roulette {
+            margin-top: 10px;
         }
         .roulette img {
             width: 300px;
@@ -40,6 +42,15 @@
             margin: 20px 0;
             font-size: 18px;
             font-weight: bold;
+            max-width: 80%;
+            line-height: 1.6;
+            white-space: pre-line;
+            overflow: hidden;
+            display: block;
+            word-wrap: break-word;
+        }
+        .fortune-text.shrink {
+            font-size: 16px; /* 文字が多いときに小さくする */
         }
         .button-container {
             display: flex;
@@ -57,7 +68,8 @@
 </head>
 <body>
     <div class="fortune-header">
-        <h1><img src="ノコトロゴ.png" width="70" height="70" alt="ロゴ">占いノコト</h1>
+        <h2><img src="ウラナイノコト.png" alt="ロゴ" style="width: 320px; height: auto;">
+        </h2>
     </div>
     <div class="container">
         <div class="roulette">
@@ -72,21 +84,21 @@
     <script>
         const images = ["イラスト1.jpg", "イラスト2.jpg", "イラスト3.jpg", "イラスト4.jpg", "イラスト5.jpg", "イラスト6.jpg"];
         const fortunes = [
-            "「今日は何をやってもうまくいく一日！<br>自信を持って進もう！」<br>とのこと",
-            "「嬉しいサプライズが待っているかも！<br>ワクワクしながら過ごしてみて。」<br>とのこと",
-            "「あなたの魅力が最大限に輝く日。<br>笑顔を大切に！」<br>とのこと",
-            "「新しいチャンスが訪れそう！<br>アンテナを張ってみよう。」<br>とのこと",
-            "「直感が冴える日。<br>迷ったら心の声に従ってみて。」<br>とのこと",
-            "「一歩ずつ着実に進むことが成功のカギ。<br>焦らずマイペースで！」<br>とのこと",
-            "「小さな幸せを大切に。<br>心がほっこりする出来事があるかも。」<br>とのこと",
-            "「今日はリラックスが大事。<br>深呼吸して、心を整えよう。」<br>とのこと",
-            "「少しスローペースな一日。<br>でも、それも大切な時間！」<br>とのこと",
-            "「無理をしなくても大丈夫。<br>あなたのペースで進めばOK!」<br>とのこと",
-            "「ちょっとしたハプニングも、<br>視点を変えれば良い経験に！」<br>とのこと",
-            "「思い通りにいかない時は休憩のサインかも。ゆっくりしよう。」<br>とのこと",
-            "「誰かの言葉に振り回されないで。<br>あなたの信じる道を進めばOK!」<br>とのこと",
-            "「頑張りすぎないことが今日のポイント。<br>適度に力を抜こう。」<br>とのこと",
-            "「もしつまずいてもそれは次の成功へのステップ。<br>大丈夫！」<br>とのこと"
+            "「今日は何をやってもうまくいく一日!自信を持って進もう!」とのこと",
+            "「嬉しいサプライズが待っているかも!ワクワクして過ごそう。」とのこと",
+            "「あなたの魅力が最大限に輝く日。笑顔を大切に!」とのこと",
+            "「新しいチャンスが訪れそう!アンテナを張ってみよう。」とのこと",
+            "「直感が冴える日。迷ったら心の声に従ってみて。」とのこと",
+            "「一歩ずつ着実に進むことが成功のカギ。焦らずマイペースで!」とのこと",
+            "「小さな幸せを大切に。心がほっこりする出来事があるかも。」とのこと",
+            "「今日はリラックスが大事。深呼吸して心を整えよう。」とのこと",
+            "「少しスローペースな一日。でも、それも大切な時間!」とのこと",
+            "「無理をしなくても大丈夫。あなたのペースで進めばOK!」とのこと",
+            "「ちょっとしたハプニングも、視点を変えれば良い経験に!」とのこと",
+            "「思い通りにいかない時は休憩のサインかも。ゆっくりしよう。」とのこと",
+            "「誰かの言葉に振り回されないで。信じる道を進めばOK!」とのこと",
+            "「頑張りすぎないことが今日のポイント。適度に力を抜こう。」とのこと",
+            "「もしつまずいてもそれは次の成功へのステップ。大丈夫!」とのこと"
         ];
         
         function spinRoulette() {
@@ -99,6 +111,13 @@
                 index = (index + 1) % images.length;
                 imageElement.src = images[index];
                 fortuneTextElement.textContent = fortunes[index % fortunes.length];
+
+                // フォントサイズ調整
+                if (fortuneTextElement.textContent.length > 40) {
+                    fortuneTextElement.classList.add('shrink');
+                } else {
+                    fortuneTextElement.classList.remove('shrink');
+                }
             }, 150);
             
             setTimeout(() => {
@@ -108,6 +127,13 @@
                 
                 const randomFortuneIndex = Math.floor(Math.random() * fortunes.length);
                 fortuneTextElement.textContent = fortunes[randomFortuneIndex];
+
+                // フォントサイズ調整
+                if (fortuneTextElement.textContent.length > 40) {
+                    fortuneTextElement.classList.add('shrink');
+                } else {
+                    fortuneTextElement.classList.remove('shrink');
+                }
             }, 2000); // 2秒間アニメーション
         }
     </script>
