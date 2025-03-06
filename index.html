@@ -36,7 +36,8 @@
         }
         .roulette img {
             width: 300px;
-            height: auto;
+            height: 300px;
+            object-fit: contain;
         }
         .fortune-text {
             margin: 20px 0;
@@ -56,30 +57,33 @@
             align-items: center;
             margin-top: 20px;
         }
-        #fortune-button {
+        #fortune-button, #stop-button {
             cursor: pointer;
             width: 150px;
             height: auto;
             display: block;
+            margin: 0 10px;
         }
     </style>
 </head>
+
 <body>
     <div class="fortune-header">
         <h2><img src="ウラナイノコト.png" alt="ロゴ" style="width: 320px; height: auto;"></h2>
     </div>
     <div class="container">
         <div class="roulette">
-            <img id="image" src="イラスト1.jpg" alt="占い画像">
+            <img id="image" src="01えり枠あり.jpg" alt="占い画像">
         </div>
         <p id="fortune-text" class="fortune-text">結果がここに表示されます。</p>
         <div class="button-container">
-            <img id="fortune-button" src="スタートボタン.png" alt="占うボタン" onclick="spinRoulette()">
+            <img id="fortune-button" src="スタートボタンオリジナル.png" alt="占うボタン" onclick="spinRoulette()">
+            <img id="stop-button" src="ストップボタンオリジナル.png" alt="止めるボタン" onclick="stopRoulette()" style="display:none;">
         </div>
     </div>
     
     <script>
-        const images = ["イラスト1.jpg", "イラスト2.jpg", "イラスト3.jpg", "イラスト4.jpg", "イラスト5.jpg", "イラスト6.jpg"];
+        const images = ["01えり枠あり.jpg", "02えり枠あり.jpg", "03えり枠あり.jpg", "04えり枠あり.jpg", "05えり枠あり.jpg"];
         const fortunes = [
             "「今日は何をやっても\nうまくいく一日!\n自信を持って進もう!\nとのこと」",
             "「嬉しいサプライズが\n待っているかも!\nワクワクして過ごそう。\nとのこと」",
@@ -99,27 +103,51 @@
             "「ポジティブな気持ちが\n幸運を引き寄せる。\n笑顔で過ごそう!\nとのこと」"
         ];
         
+        let interval;
+        
         function spinRoulette() {
             const imageElement = document.getElementById('image');
             const fortuneTextElement = document.getElementById('fortune-text');
+            const fortuneButton = document.getElementById('fortune-button');
+            const stopButton = document.getElementById('stop-button');
+            
+            // スタートボタンを非表示にし、STOPボタンを表示
+            fortuneButton.style.display = "none";
+            stopButton.style.display = "block";
+            
             let index = 0;
             
             // パラパラアニメーション
-            const interval = setInterval(() => {
+            interval = setInterval(() => {
                 index = (index + 1) % images.length;
                 imageElement.src = images[index];
                 fortuneTextElement.textContent = fortunes[index % fortunes.length];
             }, 150);
+        }
+        
+        function stopRoulette() {
+            const imageElement = document.getElementById('image');
+            const fortuneTextElement = document.getElementById('fortune-text');
+            const stopButton = document.getElementById('stop-button');
+            const fortuneButton = document.getElementById('fortune-button');
             
-            setTimeout(() => {
-                clearInterval(interval);
-                const randomIndex = Math.floor(Math.random() * images.length);
-                imageElement.src = images[randomIndex];
-                
-                const randomFortuneIndex = Math.floor(Math.random() * fortunes.length);
-                fortuneTextElement.textContent = fortunes[randomFortuneIndex];
-            }, 2000);
+            // STOPボタンを非表示にし、スタートボタンを再表示
+            stopButton.style.display = "none";
+            fortuneButton.style.display = "block";
+            
+            // アニメーション停止
+            clearInterval(interval);
+            
+            // 結果をランダムに決定
+            const randomIndex = Math.floor(Math.random() * images.length);
+            imageElement.src = images[randomIndex];
+            const randomFortuneIndex = Math.floor(Math.random() * fortunes.length);
+            fortuneTextElement.textContent = fortunes[randomFortuneIndex];
         }
     </script>
+
+<!-- JavaScriptファイルを読み込む -->
+<!-- <script src="script.js"></script> -->
+
 </body>
 </html>
