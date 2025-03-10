@@ -23,7 +23,7 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  margin: 20px auto;
+  margin: 10px auto;
   background-color: white; /* 画像の隙間を目立たなくする */
 }
 

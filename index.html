@@ -31,16 +31,13 @@
             width: 150px;
             height: auto;
         }
-        .roulette {
-            margin-top: 10px;
-        }
         .roulette img {
             width: 300px;
             height: 300px;
             object-fit: contain;
         }
         .fortune-text {
-            margin: 20px 0;
+            margin: 0;
             font-size: 18px;
             font-weight: bold;
             max-width: 80%;
@@ -77,13 +74,19 @@
         </div>
         <p id="fortune-text" class="fortune-text">結果がここに表示されます。</p>
         <div class="button-container">
-            <img id="fortune-button" src="スタートボタンオリジナル.png" alt="占うボタン" onclick="spinRoulette()">
-            <img id="stop-button" src="ストップボタンオリジナル.png" alt="止めるボタン" onclick="stopRoulette()" style="display:none;">
+            <img id="fortune-button" src="スタートボタン.png" alt="占うボタン" onclick="spinRoulette()">
+            <img id="stop-button" src="ストップボタン.png" alt="止めるボタン" onclick="stopRoulette()" style="display:none;">
         </div>
     </div>
     
     <script>
-        const images = ["01えり枠あり.jpg", "02えり枠あり.jpg", "03えり枠あり.jpg", "04えり枠あり.jpg", "05えり枠あり.jpg","06えりりん枠あり.jpg","07えりりん枠あり.jpg","08えりりん枠あり.jpg","09えりりん枠あり.jpg","10えりりん枠あり.jpg","川瀬枠あり01.jpg","川瀬枠あり02.jpg","川瀬枠あり03.jpg"];
+        const images = [
+            "01えり枠あり.jpg", "02えり枠あり.jpg", "03えり枠あり.jpg", 
+            "04えり枠あり.jpg", "05えり枠あり.jpg", "06えりりん枠あり.jpg", 
+            "07えりりん枠あり.jpg", "08えりりん枠あり.jpg", "09えりりん枠あり.jpg", 
+            "10えりりん枠あり.jpg", "川瀬枠あり01.jpg", "川瀬枠あり02.jpg", "川瀬枠あり03.jpg"
+        ];
+        
         const fortunes = [
             "「今日は何をやっても\nうまくいく一日!\n自信を持って進もう!」",
             "「嬉しいサプライズが\n待っているかも!\nワクワクして過ごそう。」",
@@ -104,6 +107,16 @@
         ];
         
         let interval;
+        let shuffledImages = [];
+        
+        function shuffleArray(array) {
+            let shuffled = array.slice();
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
         
         function spinRoulette() {
             const imageElement = document.getElementById('image');
@@ -111,17 +124,17 @@
             const fortuneButton = document.getElementById('fortune-button');
             const stopButton = document.getElementById('stop-button');
             
-            // スタートボタンを非表示にし、STOPボタンを表示
+            shuffledImages = shuffleArray(images);
+            
             fortuneButton.style.display = "none";
             stopButton.style.display = "block";
             
             let index = 0;
             
-            // パラパラアニメーション
             interval = setInterval(() => {
-                index = (index + 1) % images.length;
-                imageElement.src = images[index];
+                imageElement.src = shuffledImages[index];
                 fortuneTextElement.textContent = fortunes[index % fortunes.length];
+                index = (index + 1) % shuffledImages.length;
             }, 150);
         }
         
@@ -131,22 +144,17 @@
             const stopButton = document.getElementById('stop-button');
             const fortuneButton = document.getElementById('fortune-button');
             
-            // STOPボタンを非表示にし、スタートボタンを再表示
             stopButton.style.display = "none";
             fortuneButton.style.display = "block";
             
-            // アニメーション停止
             clearInterval(interval);
             
-            // 結果をランダムに決定
-            const randomIndex = Math.floor(Math.random() * images.length);
-            imageElement.src = images[randomIndex];
-            const randomFortuneIndex = Math.floor(Math.random() * fortunes.length);
-            fortuneTextElement.textContent = fortunes[randomFortuneIndex];
+            const finalIndex = Math.floor(Math.random() * shuffledImages.length);
+            imageElement.src = shuffledImages[finalIndex];
+            fortuneTextElement.textContent = fortunes[Math.floor(Math.random() * fortunes.length)];
         }
     </script>
 
-<!-- JavaScriptファイルを読み込む -->
 <script src="script.js"></script>
 
 </body>
