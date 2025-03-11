@@ -75,7 +75,7 @@
 
 <body>
     <div class="fortune-header">
-        <h2><img src="ウラナイノコト.png" alt="ロゴ" style="width: 320px; height: auto;"></h2>
+        <h2><img src="ウラナイノコト吹き出しあり.png" alt="ロゴ" style="width: 320px; height: auto;"></h2>
     </div>
     <div class="container">
         <div class="roulette">
@@ -90,14 +90,28 @@
     </div>
     
     <script>
-        const sets = [
-            { image: "01えり枠あり.jpg", comment: "「今日は何をやっても\nうまくいく一日!\n自信を持って進もう!」" },
-            { image: "02えり枠あり.jpg", comment: "「嬉しいサプライズが\n待っているかも!\nワクワクして過ごそう。」" },
-            { image: "03えり枠あり.jpg", comment: "「あなたの魅力が\n最大限に輝く日。\n笑顔を大切に!」" }
+        const images = ["01えり枠あり.jpg", "02えり枠あり.jpg", "03えり枠あり.jpg", "04えり枠あり.jpg", "05えり枠あり.jpg","06えりりん枠あり.jpg","07えりりん枠あり.jpg","08えりりん枠あり.jpg","09えりりん枠あり.jpg","10えりりん枠あり.jpg","川瀬枠あり01.jpg","川瀬枠あり02.jpg","川瀬枠あり03.jpg"];
+        const fortunes = [
+            "「今日は何をやっても\nうまくいく一日!\n自信を持って進もう!」", 
+            "「嬉しいサプライズが\n待っているかも!\nワクワクして過ごそう。」", 
+            "「あなたの魅力が\n最大限に輝く日。\n笑顔を大切に!」", 
+            "「新しいチャンスが\n訪れそう!\nアンテナを張ってみよう。」", 
+            "「直感が冴える日。\n迷ったら心の声に\n従ってみて。」", 
+            "「一歩ずつ着実に\n進むことが成功のカギ。\n焦らずマイペースで!」", 
+            "「小さな幸せを\n大切にすることで\n大きな幸運がくる!」", 
+            "「今日はリラックスが\n大事な日。\n深呼吸して整えよう。」", 
+            "「少しスローペースな\n一日。でもそれも\n大切な時間!」", 
+            "「無理をしなくても\n大丈夫。あなたの\nペースで進めばOK!」", 
+            "「ちょっとしたハプニング\nも視点を変えれば\n良い経験に!」", 
+            "「思い通りにいかない時\nは休憩のサインかも。\nゆっくりしよう。」", 
+            "「誰かの言葉に\n振り回されないで。\n信じる道を進めばOK!」", 
+            "「頑張りすぎないことが\n今日のポイント。\n適度に力を抜こう。」", 
+            "「もしつまずいても\nそれは次の成功への\nステップ。大丈夫!」", 
+            "「ポジティブな気持ちが\n幸運を引き寄せる。\n笑顔で過ごそう!」"
         ];
         
         let interval;
-        let currentSetIndex = 0;
+        let currentImageIndex = 0;
         
         function spinRoulette() {
             document.getElementById('fortune-text').textContent = "・・・";
@@ -106,14 +120,14 @@
             document.getElementById('stop-button').style.display = "block";
             
             interval = setInterval(() => {
-                currentSetIndex = Math.floor(Math.random() * sets.length);
-                document.getElementById('image').src = sets[currentSetIndex].image;
+                currentImageIndex = Math.floor(Math.random() * images.length);
+                document.getElementById('image').src = images[currentImageIndex];
             }, 100);
         }
         
         function stopRoulette() {
             clearInterval(interval);
-            document.getElementById('fortune-text').textContent = sets[currentSetIndex].comment + "\nとのこと";
+            document.getElementById('fortune-text').textContent = fortunes[currentImageIndex] + "\nとのこと";
             document.getElementById('warning-text').style.display = "block";
             document.getElementById('fortune-button').style.display = "block";
             document.getElementById('stop-button').style.display = "none";
