@@ -90,7 +90,16 @@
     </div>
     
     <script>
-        const images = ["01えり枠あり.jpg", "02えり枠あり.jpg", "03えり枠あり.jpg", "04えり枠あり.jpg", "05えり枠あり.jpg","06えりりん枠あり.jpg","07えりりん枠あり.jpg","08えりりん枠あり.jpg","09えりりん枠あり.jpg","10えりりん枠あり.jpg","川瀬枠あり01.jpg","川瀬枠あり02.jpg","川瀬枠あり03.jpg","久々江枠あり01.jpg","久々江枠あり02.jpg","久々江枠あり03.jpg"];
+        const images = [
+            "01えり枠あり.jpg", "02えり枠あり.jpg", "03えり枠あり.jpg",
+            "04えり枠あり.jpg", "05えり枠あり.jpg", "06えりりん枠あり.jpg",
+            "07えりりん枠あり.jpg", "08えりりん枠あり.jpg", "09えりりん枠あり.jpg",
+            "10えりりん枠あり.jpg", "川瀬枠あり01.jpg", "川瀬枠あり02.jpg",
+            "川瀬枠あり03.jpg", "久々江枠あり01.jpg", "久々江枠あり02.jpg",
+            "久々江枠あり03.jpg", "近藤枠あり01.jpg", "近藤枠あり02.jpg",
+            "近藤枠あり03.jpg", "ハナシテ01.jpg", "ハナシテ02.jpg", "ハナシテ03.jpg"
+        ];
+    
         const fortunes = [
             "「今日は何をやっても\nうまくいく一日!\n自信を持って進もう!」", 
             "「嬉しいサプライズが\n待っているかも!\nワクワクして過ごそう。」", 
@@ -109,25 +118,42 @@
             "「もしつまずいても\nそれは次の成功への\nステップ。大丈夫!」", 
             "「ポジティブな気持ちが\n幸運を引き寄せる。\n笑顔で過ごそう!」"
         ];
-        
+    
+        const specialImages = ["ハナシテ01.jpg", "ハナシテ02.jpg", "ハナシテ03.jpg"];
+        const specialFortunes = ["ハナシテノモリ１", "ハナシテノモリ２", "ハナシテノモリ３"];
+    
         let interval;
         let currentImageIndex = 0;
-        
+        let currentFortuneIndex = 0;
+    
         function spinRoulette() {
             document.getElementById('fortune-text').textContent = "・・・";
             document.getElementById('warning-text').style.display = "none";
             document.getElementById('fortune-button').style.display = "none";
             document.getElementById('stop-button').style.display = "block";
-            
+    
             interval = setInterval(() => {
                 currentImageIndex = Math.floor(Math.random() * images.length);
                 document.getElementById('image').src = images[currentImageIndex];
-            }, 100);
+            }, 170);
         }
-        
+    
         function stopRoulette() {
             clearInterval(interval);
-            document.getElementById('fortune-text').textContent = fortunes[currentImageIndex] + "\nとのこと";
+            
+            const selectedImage = images[currentImageIndex];
+            let selectedFortune;
+            
+            if (specialImages.includes(selectedImage)) {
+                const specialIndex = specialImages.indexOf(selectedImage);
+                selectedFortune = specialFortunes[specialIndex];
+            } else {
+                currentFortuneIndex = Math.floor(Math.random() * fortunes.length);
+                selectedFortune = fortunes[currentFortuneIndex];
+            }
+            
+            document.getElementById('image').src = selectedImage;
+            document.getElementById('fortune-text').textContent = selectedFortune + "\nとのこと";
             document.getElementById('warning-text').style.display = "block";
             document.getElementById('fortune-button').style.display = "block";
             document.getElementById('stop-button').style.display = "none";
