@@ -97,7 +97,8 @@
             "10えりりん枠あり.jpg", "川瀬枠あり01.jpg", "川瀬枠あり02.jpg",
             "川瀬枠あり03.jpg", "久々江枠あり01.jpg", "久々江枠あり02.jpg",
             "久々江枠あり03.jpg", "近藤枠あり01.jpg", "近藤枠あり02.jpg",
-            "近藤枠あり03.jpg", "ハナシテ01.jpg", "ハナシテ02.jpg", "ハナシテ03.jpg"
+            "近藤枠あり03.jpg", "ハナシテ01.jpg", "ハナシテ02.jpg", "ハナシテ03.jpg",
+            "レオ枠あり01.jpg","レオ枠あり02.jpg","レオ枠あり03.jpg"
         ];
     
         const fortunes = [
@@ -120,15 +121,33 @@
         ];
     
         const specialImages = ["ハナシテ01.jpg", "ハナシテ02.jpg", "ハナシテ03.jpg"];
-        const specialFortunes = ["「低いところを狙えば\n願いやすく\n叶いやすくなります」", 
-                                 "「刺激は\n受けておいたほうがいい\nいずれ慣れるから」", 
-                                 "「そんな子に育てた\n覚えはない。\nなんせ育ててないからな」"];
+        const specialFortunes = [
+            "「低いところを狙えば\n願いやすく\n叶いやすくなります」", 
+            "「刺激は\n受けておいたほうがいい\nいずれ慣れるから」", 
+            "「そんな子に育てた\n覚えはない。\nなんせ育ててないからな」"
+        ];
     
         let interval;
         let currentImageIndex = 0;
         let currentFortuneIndex = 0;
     
+        function hasPlayedToday() {
+            const lastPlayedDate = localStorage.getItem('lastPlayedDate');
+            const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD形式
+            return lastPlayedDate === today;
+        }
+    
+        function setPlayedToday() {
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.setItem('lastPlayedDate', today);
+        }
+    
         function spinRoulette() {
+            if (hasPlayedToday()) {
+                alert("今日はもう占いました！また明日お試しください。");
+                return;
+            }
+            
             document.getElementById('fortune-text').textContent = "・・・";
             document.getElementById('warning-text').style.display = "none";
             document.getElementById('fortune-button').style.display = "none";
@@ -159,7 +178,10 @@
             document.getElementById('warning-text').style.display = "block";
             document.getElementById('fortune-button').style.display = "block";
             document.getElementById('stop-button').style.display = "none";
+            
+            setPlayedToday(); // 占いをしたことを記録
         }
     </script>
+    
 </body>
 </html>
