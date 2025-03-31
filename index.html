@@ -130,6 +130,15 @@
         let interval;
         let currentImageIndex = 0;
         let currentFortuneIndex = 0;
+
+        function resetIfNewDay() {
+            const lastPlayedDate = localStorage.getItem('lastPlayedDate');
+            const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD形式
+
+            if (lastPlayedDate !== today) {
+                localStorage.removeItem('lastPlayedDate'); // 日付が変わったらリセット
+            }
+        }
     
         function hasPlayedToday() {
             const lastPlayedDate = localStorage.getItem('lastPlayedDate');
